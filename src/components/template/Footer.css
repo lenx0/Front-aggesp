@@ -3,6 +3,6 @@ footer.footer {
     align-items: center;
     justify-content: flex-end;
     padding: 0 25px;
-    position: absolute;
+    background: #FFF;
     box-shadow: var(--shadow);
 }

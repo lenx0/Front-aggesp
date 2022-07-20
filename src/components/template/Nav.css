@@ -1,4 +1,4 @@
-aside.manu-area {
+aside.menu-area {
     background-color: var(--bg-dark);
     box-shadow: 2px 0 10px 0 rgba(0, 0, 0, 0.12),
                 2px 0 15px 0 rgba(0, 0, 0, 0.09);
@@ -8,7 +8,7 @@ aside.manu-area {
 .menu a {
     display: block;
     text-decoration: none;
-    color: #07a612;
+    color: #ffffff;
     font-weight: 300;
     padding: 15px;
 }

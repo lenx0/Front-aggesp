@@ -3,7 +3,6 @@ aside.logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 120px;
 }
 
 aside.logo img {
