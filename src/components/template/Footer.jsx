@@ -4,6 +4,6 @@ import React from "react";
 export default props => 
     <footer className="footer">
         <span>
-    Designed by <strong> L e <span className="text-danger">n</span>X</strong>
+    Designed by <strong> Le<span className="text-danger">n</span>x</strong>
     </span>
     </footer>;
