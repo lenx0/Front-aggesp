@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Main from "../template/Main";
+import Main from "../template/main/Main";
 
 const headerProps = {
   icon: "users",
@@ -22,7 +22,7 @@ const initialState = {
     sector: "",
     level: "",
     function: "",
-    
+    company: "",
   },
   list: [],
 };
@@ -132,7 +132,7 @@ export default class User extends Component {
               />
             </div>
           </div>
-          
+
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label>Função</label>
@@ -148,7 +148,7 @@ export default class User extends Component {
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Cargo</label>
+              <label>Nível de acesso</label>
               <select
                 type="text"
                 className="form-control"
@@ -200,6 +200,23 @@ export default class User extends Component {
               </select>
             </div>
           </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Empresa</label>
+              <select
+                type="text"
+                className="form-control"
+                name="company"
+                onChange={(e) => this.updateField(e)}
+              >
+                <option selected>{this.state.user.company}</option>
+                <option value="Alto Giro">Alto Giro</option>
+                <option value="AGLabs">AGLabs</option>
+                <option value="Ampag">Ampag</option>
+                <option value="Restaurante">Restaurante</option>
+              </select>
+            </div>
+          </div>
         </div>
         <hr />
         <div className="row">
@@ -242,6 +259,7 @@ export default class User extends Component {
             <th>Setor</th>
             <th>Nível de acesso</th>
             <th>Função na empresa</th>
+            <th>Empresa</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -261,14 +279,15 @@ export default class User extends Component {
           <td>{user.sector}</td>
           <td>{user.level}</td>
           <td>{user.function}</td>
+          <td>{user.company}</td>
           <td>
-            <button className="btn btn-warning" onClick={() => this.load(user)}>
+            <button className="btn btn-warning" 
+            onClick={() => this.load(user)}>
               <i className="fa fa-pencil"></i>
             </button>
             <button
               className="btn btn-danger ml-2"
-              onClick={() => this.remove(user)}
-            >
+              onClick={() => this.remove(user)}>
               <i className="fa fa-trash"></i>
             </button>
           </td>

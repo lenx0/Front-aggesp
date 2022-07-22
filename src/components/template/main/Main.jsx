@@ -1,6 +1,6 @@
 import './Main.css'
 import React from 'react'
-import Header from './Header'
+import Header from '../header/Header'
 
 export default props =>
     <React.Fragment>
