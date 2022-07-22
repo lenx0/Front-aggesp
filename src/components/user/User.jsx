@@ -19,8 +19,10 @@ const initialState = {
     name: "",
     email: "",
     password: "",
-    level: "",
     sector: "",
+    level: "",
+    function: "",
+    
   },
   list: [],
 };
@@ -40,34 +42,30 @@ export default class User extends Component {
     this.setState({ user: initialState.user });
   }
 
+  /*remove(user) {
+    axios.delete(`${baseUrl}/${user.userName}`).then((resp) => {
+      const list = this.getUpdatedList(user, false);
+      this.setState({ list });
+    });
+  }*/
+
   save() {
     const user = this.state.user;
     const method = user._id ? "put" : "post";
-    const url = user._id ? `${baseUrl}/${user._id}` : `${baseUrl}/`;
+    const url = user._id ? `${baseUrl}/update/${user._id}` : `${baseUrl}/`;
     console.log(method);
     console.log(url);
     console.log(user);
     axios[method](url, user).then((resp) => {
       const list = this.getUpdatedList(resp.data);
       this.setState({ user: initialState.user, list });
-    });
-  }
-
-  create() {
-    const user = this.state.user;
-    const method = user.userName ? "não foi possivel criar o usuário" : "post";
-    const url = user.userName ? `${baseUrl}/${user.userName}` : `${baseUrl}/`;
-    console.log(method);
-    console.log(url);
-    console.log(user);
-    axios[method](url, user).then((resp) => {
-      const list = this.getUpdatedList(resp.data);
-      this.setState({ user: initialState.user, list });
+      console.log(resp.data);
+      console.log(list);
     });
   }
 
   getUpdatedList(user, add = true) {
-    const list = this.state.list.filter((u) => u.id !== user.id);
+    const list = this.state.list.filter((u) => u._id !== user._id);
     if (add) list.unshift(user);
     return list;
   }
@@ -82,6 +80,32 @@ export default class User extends Component {
     return (
       <div className="form">
         <div className="row">
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Usuário</label>
+              <input
+                type="text"
+                className="form-control"
+                name="userName"
+                value={this.state.user.userName}
+                onChange={(e) => this.updateField(e)}
+                placeholder="Nome de usuário"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Senha</label>
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                value={this.state.user.password}
+                onChange={(e) => this.updateField(e)}
+                placeholder="**********"
+              />
+            </div>
+          </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label>Nome Completo</label>
@@ -108,16 +132,17 @@ export default class User extends Component {
               />
             </div>
           </div>
+          
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Senha</label>
+              <label>Função</label>
               <input
                 type="text"
                 className="form-control"
-                name="password"
-                value={this.state.user.password}
+                name="function"
+                value={this.state.user.function}
                 onChange={(e) => this.updateField(e)}
-                placeholder="**********"
+                placeholder="Digite a função..."
               />
             </div>
           </div>
@@ -125,50 +150,53 @@ export default class User extends Component {
             <div className="form-group">
               <label>Cargo</label>
               <select
-                type="select"
+                type="text"
                 className="form-control"
                 name="level"
-                value={this.state.user.level}
                 onChange={(e) => this.updateField(e)}
-                placeholder="Digite o nível de acesso"
               >
                 <option selected>{this.state.user.level}</option>
-                <option value>Administrador</option>
-                <option value>Gestor</option>
-                <option value>Colaborador</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Gestor">Gestor</option>
+                <option value="Colaborador">Colaborador</option>
               </select>
             </div>
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label>Setor</label>
-              <select className="form-control" name="level">
+              <select
+                type="text"
+                className="form-control"
+                name="sector"
+                onChange={(e) => this.updateField(e)}
+              >
                 <option selected>{this.state.user.sector}</option>
-                <option value>Aviamento</option>
-                <option value>Gestor</option>
-                <option value>Colaborador</option>
-                <option value>Almoxarifado</option>
-                <option value>Aviamento</option>
-                <option value>Comercial</option>
-                <option value>Compras</option>
-                <option value>Corte</option>
-                <option value>Costura</option>
-                <option value>Desenvolvimento</option>
-                <option value>DP</option>
-                <option value>Ecommerce</option>
-                <option value>Engenharias</option>
-                <option value>Estilo</option>
-                <option value>Expedição</option>
-                <option value>Financeiro</option>
-                <option value>Fiscal</option>
-                <option value>Lojas</option>
-                <option value>Marketing</option>
-                <option value>Modelagem</option>
-                <option value>PCP</option>
-                <option value>Portaria</option>
-                <option value>Qualidade</option>
-                <option value>RH</option>
-                <option value>TI</option>
+                <option value="Aviamento">Aviamento</option>
+                <option value="Gestor">Gestor</option>
+                <option value="Colaborador">Colaborador</option>
+                <option value="Almoxarifado">Almoxarifado</option>
+                <option value="Aviamento">Aviamento</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Compras">Compras</option>
+                <option value="Corte">Corte</option>
+                <option value="Costura">Costura</option>
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="DP">DP</option>
+                <option value="Ecommerce">Ecommerce</option>
+                <option value="Engenharias">Engenharias</option>
+                <option value="Estilo">Estilo</option>
+                <option value="Expedição">Expedição</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Fiscal">Fiscal</option>
+                <option value="Lojas">Lojas</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Modelagem">Modelagem</option>
+                <option value="PCP">PCP</option>
+                <option value="Portaria">Portaria</option>
+                <option value="Qualidade">Qualidade</option>
+                <option value="RH">RH</option>
+                <option value="TI">TI</option>
               </select>
             </div>
           </div>
@@ -176,7 +204,7 @@ export default class User extends Component {
         <hr />
         <div className="row">
           <div className="col-12 d-flex justify-content-end">
-            <button className="btn btn-primary" onClick={(e) => this.create(e)}>
+            <button className="btn btn-primary" onClick={(e) => this.save(e)}>
               Salvar
             </button>
             <button
@@ -207,12 +235,13 @@ export default class User extends Component {
       <table className="table mt-4">
         <thead>
           <tr>
-            <th>Id</th>
+            <th>Usuário</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Senha</th>
             <th>Setor</th>
-            <th>Cargo</th>
+            <th>Nível de acesso</th>
+            <th>Função na empresa</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -225,12 +254,13 @@ export default class User extends Component {
     return this.state.list.map((user) => {
       return (
         <tr key={user._id}>
-          <td>{user.id}</td>
+          <td>{user.userName}</td>
           <td>{user.name}</td>
           <td>{user.email}</td>
           <td>{user.password}</td>
           <td>{user.sector}</td>
           <td>{user.level}</td>
+          <td>{user.function}</td>
           <td>
             <button className="btn btn-warning" onClick={() => this.load(user)}>
               <i className="fa fa-pencil"></i>
