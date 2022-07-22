@@ -123,13 +123,16 @@ export default class User extends Component {
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Acesso</label>
+              <label>Cargo</label>
               <select
+                type="select"
                 className="form-control"
                 name="level"
+                value={this.state.user.level}
+                onChange={(e) => this.updateField(e)}
                 placeholder="Digite o nível de acesso"
               >
-                <option selected>Escolher...</option>
+                <option selected>{this.state.user.level}</option>
                 <option value>Administrador</option>
                 <option value>Gestor</option>
                 <option value>Colaborador</option>
@@ -140,7 +143,7 @@ export default class User extends Component {
             <div className="form-group">
               <label>Setor</label>
               <select className="form-control" name="level">
-                <option selected>Escolher...</option>
+                <option selected>{this.state.user.sector}</option>
                 <option value>Aviamento</option>
                 <option value>Gestor</option>
                 <option value>Colaborador</option>
