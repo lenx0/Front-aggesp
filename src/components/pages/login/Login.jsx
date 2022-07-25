@@ -1,21 +1,20 @@
 import "./Login.css";
-import { React, Component } from "react";
+import React from "react";
 
 
 export default (props) => (
   <>
     <main className="content-main content container-fluid">
-      <div className="p-3 mt-3">
-      <i className="fa fa-user"></i>
-        <label></label>
+      <div className="input-container p-3 mt-3">
+      <p>Entre com seus dados</p>
+        <label>Usuário</label>
         <input
           type="text"
           className="form-control"
           name="userName"
           placeholder="Nome de usuário"
         />
-        <i className="fa fa-solid fa-lock"></i>
-        <label></label>
+        <label>Senha</label>
         <input
           type="password"
           className="form-control"
