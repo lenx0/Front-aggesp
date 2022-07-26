@@ -243,18 +243,7 @@ export default class Vacancy extends Component {
               />
             </div>
           </div>
-          <div className="col-12 col-md-6">
-            <div className="form-group">
-              <label>Observações sobre o salário</label>
-              <textarea
-                rows="5"
-                type="text"
-                className="form-control"
-                name="name"
-                placeholder="Insira as observações"
-              />
-            </div>
-          </div>
+
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Jornada de trabalho</label>
@@ -281,6 +270,57 @@ export default class Vacancy extends Component {
             <div className="form-group">
               <label>Saída</label>
               <InputHourMask />
+            </div>
+          </div>
+
+          <div className="col-12 col-md-1">
+            <div className="form-group">
+              <label>Entrada</label>
+              <InputHourMask />
+            </div>
+          </div>
+          <div className="col-12 col-md-1">
+            <div className="form-group">
+              <label>Saída</label>
+              <InputHourMask />
+            </div>
+          </div>
+          <div className="col-12 col-md-1">
+            <div className="form-group">
+              <label>De</label>
+              <select type="text" className="form-control" name="workDay">
+                <option value="industryHour">Seg</option>
+                <option value="shopHour">Ter</option>
+                <option value="differentHour">Quar</option>
+                <option value="differentHour">Quin</option>
+                <option value="differentHour">Sex</option>
+                <option value="noJourneyControl">Sáb</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-1">
+            <div className="form-group">
+              <label>Até</label>
+              <select type="text" className="form-control" name="workDay">
+                <option value="industryHour">Seg</option>
+                <option value="shopHour">Ter</option>
+                <option value="differentHour">Quar</option>
+                <option value="differentHour">Quin</option>
+                <option value="differentHour">Sex</option>
+                <option value="noJourneyControl">Sáb</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Observações sobre o salário</label>
+              <textarea
+                rows="5"
+                type="text"
+                className="form-control"
+                name="name"
+                placeholder="Insira as observações"
+              />
             </div>
           </div>
         </div>
