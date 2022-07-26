@@ -2,7 +2,8 @@ import "./Vacancies.css";
 import React, { Component } from "react";
 import axios from "axios";
 import Main from "../../template/main/Main";
-import InputMask from "../../../components/template/inputMask/InputMask";
+import InputHourMask from "../../template/inputMask/InputHourMask";
+import InputMoneyMask from "../../template/inputMask/InputMoneyMask";
 
 const headerProps = {
   icon: "users",
@@ -223,22 +224,22 @@ export default class Vacancy extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Salário inicial</label>
-              <input
-                type="number"
+              <InputMoneyMask
+                type="text"
                 className="form-control"
                 name="name"
-                placeholder="ex: 1500"
+                placeholder="R$00.00"
               />
             </div>
           </div>
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Salário pós experiência</label>
-              <input
-                type="number"
+              <InputMoneyMask
+                type="text"
                 className="form-control"
                 name="name"
-                placeholder="ex: 2500"
+                placeholder="R$00.00"
               />
             </div>
           </div>
@@ -271,17 +272,17 @@ export default class Vacancy extends Component {
             </div>
           </div>
           <div className="col-12 col-md-1">
-              <div className="form-group">
-                <label>Entrada</label>
-                <InputMask />
-              </div>
+            <div className="form-group">
+              <label>Entrada</label>
+              <InputHourMask />
             </div>
-            <div className="col-12 col-md-1">
-              <div className="form-group">
-                <label>Saída</label>
-                <InputMask />
-              </div>
+          </div>
+          <div className="col-12 col-md-1">
+            <div className="form-group">
+              <label>Saída</label>
+              <InputHourMask />
             </div>
+          </div>
         </div>
         <div className="row">
           <div className="col-12 d-flex justify-content-end">
