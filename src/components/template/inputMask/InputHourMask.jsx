@@ -26,6 +26,7 @@ export default function TimeInput(props) {
       className="form-control"
       onChange={props.onChange}
       formatChars={formatChars}
+      placeholder="00:00"
       beforeMaskedValueChange={beforeMaskedValueChange}
       awaysShowMask="true"
     ></InputHourMask>
