@@ -281,13 +281,13 @@ export default class User extends Component {
           <td>{user.function}</td>
           <td>{user.company}</td>
           <td>
-            <button className="btn btn-warning" 
-            onClick={() => this.load(user)}>
+            <button className="btn btn-warning" onClick={() => this.load(user)}>
               <i className="fa fa-pencil"></i>
             </button>
             <button
               className="btn btn-danger ml-2"
-              onClick={() => this.remove(user)}>
+              onClick={() => this.remove(user)}
+            >
               <i className="fa fa-trash"></i>
             </button>
           </td>

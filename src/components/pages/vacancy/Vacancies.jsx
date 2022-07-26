@@ -2,6 +2,7 @@ import "./Vacancies.css";
 import React, { Component } from "react";
 import axios from "axios";
 import Main from "../../template/main/Main";
+import InputMask from "../../../components/template/inputMask/InputMask";
 
 const headerProps = {
   icon: "users",
@@ -34,6 +35,10 @@ const initialState = {
     shopHour: "",
     differentHour: "",
     noJourneyControl: "",
+    entranceDay: "",
+    exitDay: "",
+    entranceLunch: "",
+    exitLunch: "",
     requerimentsForPosition: "",
   },
   list: [],
@@ -156,25 +161,128 @@ export default class Vacancy extends Component {
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Aprendiz</label>
-              <select type="text" className="form-control" name="sector">
-                <option value="TI">TI</option>
-              </select>
+              <label>Funcionário suplente</label>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                placeholder="Insira o nome"
+              />
             </div>
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Empresa</label>
-              <select type="text" className="form-control" name="company">
-                <option value="Alto Giro">Alto Giro</option>
-                <option value="AGLabs">AGLabs</option>
-                <option value="Ampag">Ampag</option>
-                <option value="Restaurante">Restaurante</option>
+              <label>Previsão de Admissão/Início</label>
+              <input type="date" className="form-control" name="sector"></input>
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Cargo/Função</label>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                placeholder="Digite o cargo"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Setor</label>
+              <select
+                type="text"
+                className="form-control"
+                name="selectiveProcess"
+              >
+                <option value="Aviamento">Aviamento</option>
+                <option value="Almoxarifado">Almoxarifado</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Compras">Compras</option>
+                <option value="Corte">Corte</option>
+                <option value="Costura">Costura</option>
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="DP">DP</option>
+                <option value="Ecommerce">Ecommerce</option>
+                <option value="Engenharias">Engenharias</option>
+                <option value="Estilo">Estilo</option>
+                <option value="Expedição">Expedição</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Fiscal">Fiscal</option>
+                <option value="Lojas">Lojas</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Modelagem">Modelagem</option>
+                <option value="PCP">PCP</option>
+                <option value="Portaria">Portaria</option>
+                <option value="Qualidade">Qualidade</option>
+                <option value="RH">RH</option>
+                <option value="TI">TI</option>
               </select>
             </div>
           </div>
+          <div className="col-12 col-md-3">
+            <div className="form-group">
+              <label>Salário inicial</label>
+              <input
+                type="number"
+                className="form-control"
+                name="name"
+                placeholder="ex: 1500"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className="form-group">
+              <label>Salário pós experiência</label>
+              <input
+                type="number"
+                className="form-control"
+                name="name"
+                placeholder="ex: 2500"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Observações sobre o salário</label>
+              <textarea
+                rows="5"
+                type="text"
+                className="form-control"
+                name="name"
+                placeholder="Insira as observações"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className="form-group">
+              <label>Jornada de trabalho</label>
+              <select type="text" className="form-control" name="workDay">
+                <option value="industryHour">Horário da Fábrica</option>
+                <option value="administrativeHour">
+                  Horário Administrativo
+                </option>
+                <option value="shopHour">Horário Lojas</option>
+                <option value="differentHour">Horário Diferenciado</option>
+                <option value="noJourneyControl">
+                  Sem controle de jornada
+                </option>
+              </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-1">
+              <div className="form-group">
+                <label>Entrada</label>
+                <InputMask />
+              </div>
+            </div>
+            <div className="col-12 col-md-1">
+              <div className="form-group">
+                <label>Saída</label>
+                <InputMask />
+              </div>
+            </div>
         </div>
-        <hr />
         <div className="row">
           <div className="col-12 d-flex justify-content-end">
             <button className="btn btn-primary" onClick={(e) => this.save(e)}>
