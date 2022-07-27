@@ -111,7 +111,7 @@ export default class Vacancy extends Component {
               />
             </div>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-2">
             <div className="form-group">
               <label>Área</label>
               <select
@@ -144,7 +144,7 @@ export default class Vacancy extends Component {
               </select>
             </div>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-4">
             <div className="form-group">
               <label>Processo Seletivo</label>
               <select
@@ -221,7 +221,7 @@ export default class Vacancy extends Component {
               </select>
             </div>
           </div>
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-md-2">
             <div className="form-group">
               <label>Salário inicial</label>
               <InputMoneyMask
@@ -232,9 +232,9 @@ export default class Vacancy extends Component {
               />
             </div>
           </div>
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-md-2">
             <div className="form-group">
-              <label>Salário pós experiência</label>
+              <label>Pós experiência</label>
               <InputMoneyMask
                 type="text"
                 className="form-control"
@@ -243,8 +243,7 @@ export default class Vacancy extends Component {
               />
             </div>
           </div>
-
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-md-2">
             <div className="form-group">
               <label>Jornada de trabalho</label>
               <select type="text" className="form-control" name="workDay">
@@ -260,60 +259,83 @@ export default class Vacancy extends Component {
               </select>
             </div>
           </div>
-          <div className="col-12 col-md-1">
+          <div className="col-12 col-md-3">
             <div className="form-group">
-              <label>Entrada</label>
+              <label>Entrada expediente</label>
               <InputHourMask />
             </div>
           </div>
-          <div className="col-12 col-md-1">
+          <div className="col-12 col-md-3">
             <div className="form-group">
-              <label>Saída</label>
+              <label>Saída expediente</label>
               <InputHourMask />
             </div>
           </div>
-
-          <div className="col-12 col-md-1">
+          <div className="col-12 col-md-3">
             <div className="form-group">
-              <label>Entrada</label>
-              <InputHourMask />
-            </div>
-          </div>
-          <div className="col-12 col-md-1">
-            <div className="form-group">
-              <label>Saída</label>
-              <InputHourMask />
-            </div>
-          </div>
-          <div className="col-12 col-md-1">
-            <div className="form-group">
-              <label>De</label>
+              <label>Primeiro dia</label>
               <select type="text" className="form-control" name="workDay">
-                <option value="industryHour">Seg</option>
-                <option value="shopHour">Ter</option>
-                <option value="differentHour">Quar</option>
-                <option value="differentHour">Quin</option>
-                <option value="differentHour">Sex</option>
-                <option value="noJourneyControl">Sáb</option>
+                <option value="monday">Seg</option>
+                <option value="third">Ter</option>
+                <option value="fourth">Quar</option>
+                <option value="thursday">Quin</option>
+                <option value="friday">Sex</option>
+                <option value="saturday">Sáb</option>
               </select>
             </div>
           </div>
-          <div className="col-12 col-md-1">
+          <div className="col-12 col-md-3">
             <div className="form-group">
-              <label>Até</label>
+              <label>Último dia</label>
               <select type="text" className="form-control" name="workDay">
-                <option value="industryHour">Seg</option>
-                <option value="shopHour">Ter</option>
-                <option value="differentHour">Quar</option>
-                <option value="differentHour">Quin</option>
-                <option value="differentHour">Sex</option>
-                <option value="noJourneyControl">Sáb</option>
+                <option value="monday">Seg</option>
+                <option value="third">Ter</option>
+                <option value="fourth">Quar</option>
+                <option value="thursday">Quin</option>
+                <option value="friday">Sex</option>
+                <option value="saturday">Sáb</option>
               </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className="form-group">
+              <label>Entrada intervalo</label>
+              <InputHourMask />
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className="form-group">
+              <label>Saída intervalo</label>
+              <InputHourMask />
             </div>
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label>Observações sobre o salário</label>
+              <textarea
+                rows="5"
+                type="text"
+                className="form-control"
+                name="name"
+                placeholder="Insira as observações"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Observações sobre o expediente</label>
+              <textarea
+                rows="5"
+                type="text"
+                className="form-control"
+                name="name"
+                placeholder="Insira as observações"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Requisitos para o cargo</label>
               <textarea
                 rows="5"
                 type="text"
@@ -341,71 +363,10 @@ export default class Vacancy extends Component {
     );
   }
 
-  load(user) {
-    this.setState({ user });
-  }
-
-  remove(user) {
-    axios.delete(`${baseUrl}/${user._id}`).then((resp) => {
-      const list = this.getUpdatedList(user, false);
-      this.setState({ list });
-    });
-  }
-
-  renderTable() {
-    return (
-      <table className="table mt-4">
-        <thead>
-          <tr>
-            <th>Usuário</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Senha</th>
-            <th>Setor</th>
-            <th>Nível de acesso</th>
-            <th>Função na empresa</th>
-            <th>Empresa</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>{this.renderRows()}</tbody>
-      </table>
-    );
-  }
-
-  renderRows() {
-    return this.state.list.map((user) => {
-      return (
-        <tr key={user._id}>
-          <td>{user.userName}</td>
-          <td>{user.name}</td>
-          <td>{user.email}</td>
-          <td>{user.password}</td>
-          <td>{user.sector}</td>
-          <td>{user.level}</td>
-          <td>{user.function}</td>
-          <td>{user.company}</td>
-          <td>
-            <button className="btn btn-warning" onClick={() => this.load(user)}>
-              <i className="fa fa-pencil"></i>
-            </button>
-            <button
-              className="btn btn-danger ml-2"
-              onClick={() => this.remove(user)}
-            >
-              <i className="fa fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      );
-    });
-  }
-
   render() {
     return (
       <Main {...headerProps}>
         {this.renderForm()}
-        {this.renderTable()}
       </Main>
     );
   }
