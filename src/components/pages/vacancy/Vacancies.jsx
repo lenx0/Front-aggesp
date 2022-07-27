@@ -4,6 +4,7 @@ import axios from "axios";
 import Main from "../../template/main/Main";
 import InputHourMask from "../../template/inputMask/InputHourMask";
 import InputMoneyMask from "../../template/inputMask/InputMoneyMask";
+import DatePicker from "../../template/inputMask/InputDateMask";
 
 const headerProps = {
   icon: "users",
@@ -17,7 +18,9 @@ const baseUrl = "http://localhost:3001/users";*/
 //API
 const baseUrl = "http://localhost:3005/v1/agesp";
 const initialState = {
-  requester: {
+  vacancies: {
+    status: "",
+    dateTime: "",
     name: "",
     area: "",
     effectiveInc: "",
@@ -49,7 +52,7 @@ export default class Vacancy extends Component {
   state = { ...initialState };
 
   componentWillMount() {
-    axios(`${baseUrl}/${"list-vacancies"}`).then((resp) => {
+    axios(`${baseUrl}/vacancy${"/list/"}`).then((resp) => {
       this.setState({ list: resp.data });
       console.log(`Dados da lista:${JSON.stringify(resp.data)}`);
       //axios.delete(`${baseUrl}/${user._id}`)
@@ -60,25 +63,18 @@ export default class Vacancy extends Component {
     this.setState({ requester: initialState.requester });
   }
 
-  /*remove(user) {
-    axios.delete(`${baseUrl}/${user.userName}`).then((resp) => {
-      const list = this.getUpdatedList(user, false);
-      this.setState({ list });
-    });
-  }*/
-
   save() {
     const requester = this.state.requester;
     const method = requester._id ? "put" : "post";
     const url = requester._id
-      ? `${baseUrl}/update/${requester._id}`
-      : `${baseUrl}/`;
+      ? `${baseUrl}/vacancy/update/${requester._id}`
+      : `${baseUrl}/vacancy/create/`;
     console.log(method);
     console.log(url);
     console.log(requester);
     axios[method](url, requester).then((resp) => {
       const list = this.getUpdatedList(resp.data);
-      this.setState({ user: initialState.requester, list });
+      this.setState({ vacancies: initialState.requester, list });
       console.log(resp.data);
       console.log(list);
     });
@@ -100,6 +96,18 @@ export default class Vacancy extends Component {
     return (
       <div className="form">
         <div className="row">
+          <div className="col-12 col-md-3">
+            <div className="form-group">
+              <label>Status</label>
+              <select type="text" className="form-control" name="workDay">
+                <option value="opened">Aberta</option>
+                <option value="canceled">Cancelada</option>
+                <option value="frozen">Congelada</option>
+                <option value="closed">Fechada</option>
+                <option value="suspended">Suspensa</option>
+              </select>
+            </div>
+          </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label>Nome</label>
@@ -111,7 +119,7 @@ export default class Vacancy extends Component {
               />
             </div>
           </div>
-          <div className="col-12 col-md-2">
+          <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Área</label>
               <select
@@ -160,7 +168,7 @@ export default class Vacancy extends Component {
               </select>
             </div>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-8">
             <div className="form-group">
               <label>Funcionário suplente</label>
               <input
@@ -171,10 +179,16 @@ export default class Vacancy extends Component {
               />
             </div>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-3">
             <div className="form-group">
-              <label>Previsão de Admissão/Início</label>
-              <input type="date" className="form-control" name="sector"></input>
+              <label>Abertura</label>
+              <DatePicker />
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className="form-group">
+              <label>Admissão/Início</label>
+              <DatePicker />
             </div>
           </div>
           <div className="col-12 col-md-6">
@@ -275,12 +289,12 @@ export default class Vacancy extends Component {
             <div className="form-group">
               <label>Primeiro dia</label>
               <select type="text" className="form-control" name="workDay">
-                <option value="monday">Seg</option>
-                <option value="third">Ter</option>
-                <option value="fourth">Quar</option>
-                <option value="thursday">Quin</option>
-                <option value="friday">Sex</option>
-                <option value="saturday">Sáb</option>
+                <option value="monday">Segunda</option>
+                <option value="third">Terça</option>
+                <option value="fourth">Quarta</option>
+                <option value="thursday">Quinta</option>
+                <option value="friday">Sexta</option>
+                <option value="saturday">Sábado</option>
               </select>
             </div>
           </div>
@@ -288,12 +302,12 @@ export default class Vacancy extends Component {
             <div className="form-group">
               <label>Último dia</label>
               <select type="text" className="form-control" name="workDay">
-                <option value="monday">Seg</option>
-                <option value="third">Ter</option>
-                <option value="fourth">Quar</option>
-                <option value="thursday">Quin</option>
-                <option value="friday">Sex</option>
-                <option value="saturday">Sáb</option>
+                <option value="monday">Segunda</option>
+                <option value="third">Terça</option>
+                <option value="fourth">Quarta</option>
+                <option value="thursday">Quinta</option>
+                <option value="friday">Sexta</option>
+                <option value="saturday">Sábado</option>
               </select>
             </div>
           </div>
@@ -347,7 +361,7 @@ export default class Vacancy extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 d-flex justify-content-end">
+          <div className="col-12 d-flex justify-content-center">
             <button className="btn btn-primary" onClick={(e) => this.save(e)}>
               Salvar
             </button>
@@ -355,18 +369,95 @@ export default class Vacancy extends Component {
               className="btn btn-secondary ml-2"
               onClick={(e) => this.clear(e)}
             >
-              Cancelar
+              Limpar
             </button>
           </div>
         </div>
       </div>
     );
   }
+  load(vacancies) {
+    this.setState({ vacancies });
+  }
+
+  remove(vacancies) {
+    axios.delete(`${baseUrl}/${vacancies._id}`).then((resp) => {
+      const list = this.getUpdatedList(vacancies, false);
+      this.setState({ list });
+    });
+  }
+  renderTable() {
+    return (
+      <table className="table mt-4">
+        <thead>
+          <tr>
+            <th>Abertura</th>
+            <th>Cargo</th>
+            <th>Setor</th>
+            <th>Gestor</th>
+            <th>Responsável</th>
+            <th>Motivo</th>
+            <th>Salário</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>{this.renderRows()}</tbody>
+      </table>
+    );
+  }
+  renderRows() {
+    return this.state.list.map((vacancies) => {
+      return (
+        <tr key={vacancies._id}>
+          <td>{vacancies.status}</td>
+          <td>{vacancies.dateTime}</td>
+          <td>{vacancies.name}</td>
+          <td>{vacancies.area}</td>
+          <td>{vacancies.replacement}</td>
+          <td>{vacancies.temporary}</td>
+          <td>{vacancies.intern}</td>
+          <td>{vacancies.apprentice}</td>
+          <td>{vacancies.admissionDateOrExpectDate}</td>
+          <td>{vacancies.positionOrFunction}</td>
+          <td>{vacancies.initialSalary}</td>
+          <td>{vacancies.sector}</td>
+          <td>{vacancies.postExpSalary}</td>
+          <td>{vacancies.obsOrSalaryRemarks}</td>
+          <td>{vacancies.industryHour}</td>
+          <td>{vacancies.administrativeHour}</td>
+          <td>{vacancies.shopHour}</td>
+          <td>{vacancies.differentHour}</td>
+          <td>{vacancies.noJourneyControl}</td>
+          <td>{vacancies.entranceDay}</td>
+          <td>{vacancies.exitDay}</td>
+          <td>{vacancies.entranceLunch}</td>
+          <td>{vacancies.exitLunch}</td>
+          <td>{vacancies.requerimentsForPosition}</td>
+          <td>{vacancies.status}</td>
+          <td>
+            <button
+              className="btn btn-warning ml-2"
+              onClick={() => this.load(vacancies)}
+            >
+              <i className="fa fa-pencil"></i>
+            </button>
+            <button
+              className="btn btn-danger ml-2"
+              onClick={() => this.remove(vacancies)}
+            >
+              <i className="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      );
+    });
+  }
 
   render() {
     return (
       <Main {...headerProps}>
         {this.renderForm()}
+        {this.renderTable()}
       </Main>
     );
   }

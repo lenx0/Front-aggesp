@@ -31,7 +31,7 @@ export default class User extends Component {
   state = { ...initialState };
 
   componentWillMount() {
-    axios(`${baseUrl}/${"list-all"}`).then((resp) => {
+    axios(`${baseUrl}/user${"/list"}`).then((resp) => {
       this.setState({ list: resp.data });
       console.log(`Dados da lista:${JSON.stringify(resp.data)}`);
       //axios.delete(`${baseUrl}/${user._id}`)
@@ -52,7 +52,9 @@ export default class User extends Component {
   save() {
     const user = this.state.user;
     const method = user._id ? "put" : "post";
-    const url = user._id ? `${baseUrl}/update/${user._id}` : `${baseUrl}/`;
+    const url = user._id
+      ? `${baseUrl}/user/update/${user._id}`
+      : `${baseUrl}/user/create/`;
     console.log(method);
     console.log(url);
     console.log(user);
@@ -228,7 +230,7 @@ export default class User extends Component {
               className="btn btn-secondary ml-2"
               onClick={(e) => this.clear(e)}
             >
-              Cancelar
+              Limpar
             </button>
           </div>
         </div>
@@ -241,7 +243,7 @@ export default class User extends Component {
   }
 
   remove(user) {
-    axios.delete(`${baseUrl}/${user._id}`).then((resp) => {
+    axios.delete(`${baseUrl}/user/delete/${user._id}`).then((resp) => {
       const list = this.getUpdatedList(user, false);
       this.setState({ list });
     });
@@ -281,14 +283,16 @@ export default class User extends Component {
           <td>{user.function}</td>
           <td>{user.company}</td>
           <td>
-            <button 
-              className="btn btn-warning ml-2" 
-              onClick={() => this.load(user)}>
+            <button
+              className="btn btn-warning ml-2"
+              onClick={() => this.load(user)}
+            >
               <i className="fa fa-pencil"></i>
             </button>
             <button
               className="btn btn-danger ml-2"
-              onClick={() => this.remove(user)}>
+              onClick={() => this.remove(user)}
+            >
               <i className="fa-solid fa-trash"></i>
             </button>
           </td>

@@ -2,7 +2,7 @@ import "./Login.css";
 import React from "react";
 
 
-export default (props) => (
+export default () => (
   <>
     <main className="content-main content container-fluid">
       <div className="input-container p-3 mt-3">
