@@ -101,11 +101,12 @@ export default class Vacancies extends Component {
                 name="status"
                 onChange={(e) => this.updateField(e)}
               >
-                <option value="opened">Aberta</option>
-                <option value="canceled">Cancelada</option>
-                <option value="frozen">Congelada</option>
-                <option value="closed">Fechada</option>
-                <option value="suspended">Suspensa</option>
+                <option selected>{this.state.requester.status}</option>
+                <option value="Aberta">Aberta</option>
+                <option value="Cancelada">Cancelada</option>
+                <option value="Congelada">Congelada</option>
+                <option value="Fechada">Fechada</option>
+                <option value="Suspensa">Suspensa</option>
               </select>
             </div>
           </div>
@@ -131,6 +132,7 @@ export default class Vacancies extends Component {
                 name="requesterArea"
                 onChange={(e) => this.updateField(e)}
               >
+                <option selected>{this.state.requester.requesterArea}</option>
                 <option value="Aviamento">Aviamento</option>
                 <option value="Almoxarifado">Almoxarifado</option>
                 <option value="Comercial">Comercial</option>
@@ -165,11 +167,11 @@ export default class Vacancies extends Component {
                 name="selectiveProcess"
                 onChange={(e) => this.updateField(e)}
               >
-                <option selected> value={this.user.selectiveProcess}</option>
-                <option value="replacement">Substituição</option>
-                <option value="temporary">Temporário</option>
-                <option value="intern">Estagiário</option>
-                <option value="apprentice">Aprendiz</option>
+                <option selected>{this.state.requester.selectiveProcess}</option>
+                <option value="Substituição">Substituição</option>
+                <option value="Temporário">Temporário</option>
+                <option value="Estagiário">Estagiário</option>
+                <option value="Aprendiz">Aprendiz</option>
               </select>
             </div>
           </div>
@@ -228,7 +230,8 @@ export default class Vacancies extends Component {
                 name="sector"
                 onChange={(e) => this.updateField(e)}
               >
-                <option value="Aviamento">Aviamento</option>
+
+                <option selected>{this.state.requester.sector}</option>
                 <option value="Almoxarifado">Almoxarifado</option>
                 <option value="Comercial">Comercial</option>
                 <option value="Compras">Compras</option>
@@ -292,9 +295,9 @@ export default class Vacancies extends Component {
                 <option value="administrativeHour">
                   Horário Administrativo
                 </option>
-                <option value="shopHour">Horário Lojas</option>
-                <option value="differentHour">Horário Diferenciado</option>
-                <option value="noJourneyControl">
+                <option value="Horário Lojas">Horário Lojas</option>
+                <option value="Horário Diferenciado">Horário Diferenciado</option>
+                <option value="Sem controle de jornada">
                   Sem controle de jornada
                 </option>
               </select>
@@ -454,6 +457,12 @@ export default class Vacancies extends Component {
         <thead>
           <tr>
             <th>Status</th>
+            <th>Cargo</th>
+            <th>Setor</th>
+            <th>Gestor</th>
+            <th>Responsável</th>
+            <th>Motivo</th>
+            <th>Salário</th>
           </tr>
         </thead>
         <tbody>{this.renderRows()}</tbody>
@@ -465,6 +474,21 @@ export default class Vacancies extends Component {
       return (
         <tr key={requester._id}>
           <td>{requester.status}</td>
+          <td>{requester.vacancyDateOpen}</td>
+          <td>{requester.requesterName}</td>
+          <td>{requester.requesterArea}</td>
+          <td>{requester.replacedEmployee}</td>
+          <td>{requester.admissionDate}</td>
+          <td>{requester.positionOrFunction}</td>
+          <td>{requester.initialSalary}</td>
+          <td>{requester.sector}</td>
+          <td>{requester.postExpSalary}</td>
+          <td>{requester.obsOrSalaryRemarks}</td>
+          <td>{requester.entranceDayHour}</td>
+          <td>{requester.exitDayHour}</td>
+          <td>{requester.entranceLunchHour}</td>
+          <td>{requester.exitLunchHour}</td>
+          <td>{requester.requerimentsForPosition}</td>
           <td>
             <button
               className="btn btn-warning ml-2"
