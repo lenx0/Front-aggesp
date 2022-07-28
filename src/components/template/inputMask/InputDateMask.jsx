@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// OPÇÃO DE MASCARA PARA DATA USANDO O DATEPICKER //
+
+/*import React, { useState } from "react";
 import "./InputDateMask.css";
 import DatePicker from "react-date-picker";
 
@@ -10,4 +12,4 @@ export default function DateMask() {
             <DatePicker className="datePicker" onChange={onChange} value={value} />
         </div>
     );
-};
+};*/

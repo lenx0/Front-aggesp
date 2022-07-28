@@ -4,7 +4,7 @@ import axios from "axios";
 import Main from "../../template/main/Main";
 import InputHourMask from "../../template/inputMask/InputHourMask";
 import InputMoneyMask from "../../template/inputMask/InputMoneyMask";
-import DatePicker from "../../template/inputMask/InputDateMask";
+import InputDateMaskBootstrap from "../../template/inputMask/InputDateMaskBootstrap";
 
 const headerProps = {
   icon: "users",
@@ -18,41 +18,37 @@ const baseUrl = "http://localhost:3001/users";*/
 //API
 const baseUrl = "http://localhost:3005/v1/agesp";
 const initialState = {
-  vacancies: {
+  requester: {
     status: "",
-    dateTime: "",
-    name: "",
-    area: "",
-    effectiveInc: "",
-    replacement: "",
-    temporary: "",
-    intern: "",
-    apprentice: "",
-    admissionDateOrExpectDate: "",
+    vacancyDateOpen: "",
+    requesterName: "",
+    requesterArea: "",
+    admissionDate: "",
     positionOrFunction: "",
+    replacedEmployee: "",
     initialSalary: "",
     sector: "",
     postExpSalary: "",
+    workDay: "",
     obsOrSalaryRemarks: "",
-    industryHour: "",
-    administrativeHour: "",
-    shopHour: "",
-    differentHour: "",
-    noJourneyControl: "",
-    entranceDay: "",
-    exitDay: "",
-    entranceLunch: "",
-    exitLunch: "",
+    selectiveProcess: "",
+    entranceDayHour: "",
+    exitDayHour: "",
+    firstWeekDay: "",
+    lastWeekDay: "",
+    entranceLunchHour: "",
+    exitLunchHour: "",
+    obsOfficeHour: "",
     requerimentsForPosition: "",
   },
   list: [],
 };
 
-export default class Vacancy extends Component {
+export default class Vacancies extends Component {
   state = { ...initialState };
 
   componentWillMount() {
-    axios(`${baseUrl}/vacancy${"/list/"}`).then((resp) => {
+    axios(`${baseUrl}/vacancy/${"list/"}`).then((resp) => {
       this.setState({ list: resp.data });
       console.log(`Dados da lista:${JSON.stringify(resp.data)}`);
       //axios.delete(`${baseUrl}/${user._id}`)
@@ -74,7 +70,7 @@ export default class Vacancy extends Component {
     console.log(requester);
     axios[method](url, requester).then((resp) => {
       const list = this.getUpdatedList(resp.data);
-      this.setState({ vacancies: initialState.requester, list });
+      this.setState({ requester: initialState.requester, list });
       console.log(resp.data);
       console.log(list);
     });
@@ -99,7 +95,12 @@ export default class Vacancy extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Status</label>
-              <select type="text" className="form-control" name="workDay">
+              <select
+                type="text"
+                className="form-control"
+                name="status"
+                onChange={(e) => this.updateField(e)}
+              >
                 <option value="opened">Aberta</option>
                 <option value="canceled">Cancelada</option>
                 <option value="frozen">Congelada</option>
@@ -114,7 +115,9 @@ export default class Vacancy extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="name"
+                name="requesterName"
+                value={this.state.requester.requesterName}
+                onChange={(e) => this.updateField(e)}
                 placeholder="Solicitante"
               />
             </div>
@@ -125,7 +128,8 @@ export default class Vacancy extends Component {
               <select
                 type="text"
                 className="form-control"
-                name="selectiveProcess"
+                name="requesterArea"
+                onChange={(e) => this.updateField(e)}
               >
                 <option value="Aviamento">Aviamento</option>
                 <option value="Almoxarifado">Almoxarifado</option>
@@ -159,8 +163,9 @@ export default class Vacancy extends Component {
                 type="text"
                 className="form-control"
                 name="selectiveProcess"
+                onChange={(e) => this.updateField(e)}
               >
-                <option value="effectiveInc">Aumento Efetivo</option>
+                <option selected> value={this.user.selectiveProcess}</option>
                 <option value="replacement">Substituição</option>
                 <option value="temporary">Temporário</option>
                 <option value="intern">Estagiário</option>
@@ -174,7 +179,9 @@ export default class Vacancy extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="name"
+                name="replacedEmployee"
+                value={this.state.requester.replacedEmployee}
+                onChange={(e) => this.updateField(e)}
                 placeholder="Insira o nome"
               />
             </div>
@@ -182,13 +189,21 @@ export default class Vacancy extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Abertura</label>
-              <DatePicker />
+              <InputDateMaskBootstrap
+                name="vacancyDateOpen"
+                value={this.state.requester.vacancyDateOpen}
+                onChange={(e) => this.updateField(e)}
+              />
             </div>
           </div>
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Admissão/Início</label>
-              <DatePicker />
+              <InputDateMaskBootstrap
+                name="admissionDate"
+                value={this.state.requester.admissionDate}
+                onChange={(e) => this.updateField(e)}
+              />
             </div>
           </div>
           <div className="col-12 col-md-6">
@@ -197,7 +212,9 @@ export default class Vacancy extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="name"
+                name="positionOrFunction"
+                value={this.state.requester.positionOrFunction}
+                onChange={(e) => this.updateField(e)}
                 placeholder="Digite o cargo"
               />
             </div>
@@ -208,7 +225,8 @@ export default class Vacancy extends Component {
               <select
                 type="text"
                 className="form-control"
-                name="selectiveProcess"
+                name="sector"
+                onChange={(e) => this.updateField(e)}
               >
                 <option value="Aviamento">Aviamento</option>
                 <option value="Almoxarifado">Almoxarifado</option>
@@ -241,7 +259,9 @@ export default class Vacancy extends Component {
               <InputMoneyMask
                 type="text"
                 className="form-control"
-                name="name"
+                name="initialSalary"
+                value={this.state.requester.initialSalary}
+                onChange={(e) => this.updateField(e)}
                 placeholder="R$00.00"
               />
             </div>
@@ -252,7 +272,9 @@ export default class Vacancy extends Component {
               <InputMoneyMask
                 type="text"
                 className="form-control"
-                name="name"
+                name="postExpSalary"
+                value={this.state.requester.postExpSalary}
+                onChange={(e) => this.updateField(e)}
                 placeholder="R$00.00"
               />
             </div>
@@ -260,7 +282,12 @@ export default class Vacancy extends Component {
           <div className="col-12 col-md-2">
             <div className="form-group">
               <label>Jornada de trabalho</label>
-              <select type="text" className="form-control" name="workDay">
+              <select
+                type="text"
+                className="form-control"
+                name="workDay"
+                onChange={(e) => this.updateField(e)}
+              >
                 <option value="industryHour">Horário da Fábrica</option>
                 <option value="administrativeHour">
                   Horário Administrativo
@@ -276,19 +303,33 @@ export default class Vacancy extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Entrada expediente</label>
-              <InputHourMask />
+              <InputHourMask
+                name="entranceDayHour"
+                value={this.state.requester.entranceDayHour}
+                onChange={(e) => this.updateField(e)}
+              />
             </div>
           </div>
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Saída expediente</label>
-              <InputHourMask />
+              <InputHourMask
+                name="exitDayHour"
+                value={this.state.requester.exitDayHour}
+                onChange={(e) => this.updateField(e)}
+              />
             </div>
           </div>
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Primeiro dia</label>
-              <select type="text" className="form-control" name="workDay">
+              <select
+                type="text"
+                className="form-control"
+                name="firstWeekDay"
+                value={this.state.requester.firstWeekDay}
+                onChange={(e) => this.updateField(e)}
+              >
                 <option value="monday">Segunda</option>
                 <option value="third">Terça</option>
                 <option value="fourth">Quarta</option>
@@ -301,7 +342,13 @@ export default class Vacancy extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Último dia</label>
-              <select type="text" className="form-control" name="workDay">
+              <select
+                type="text"
+                className="form-control"
+                name="lastWeekDay"
+                value={this.state.requester.lastWeekDay}
+                onChange={(e) => this.updateField(e)}
+              >
                 <option value="monday">Segunda</option>
                 <option value="third">Terça</option>
                 <option value="fourth">Quarta</option>
@@ -314,13 +361,22 @@ export default class Vacancy extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Entrada intervalo</label>
-              <InputHourMask />
+              <InputHourMask
+                name="entranceLunchHour"
+                value={this.state.requester.entranceLunchHour}
+                onChange={(e) => this.updateField(e)}
+              />
             </div>
           </div>
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Saída intervalo</label>
-              <InputHourMask />
+              <InputHourMask
+                className="form-control"
+                name="exitLunchHour"
+                value={this.state.requester.exitLunchHour}
+                onChange={(e) => this.updateField(e)}
+              />
             </div>
           </div>
           <div className="col-12 col-md-6">
@@ -330,7 +386,9 @@ export default class Vacancy extends Component {
                 rows="5"
                 type="text"
                 className="form-control"
-                name="name"
+                name="obsOrSalaryRemarks"
+                value={this.state.requester.obsOrSalaryRemarks}
+                onChange={(e) => this.updateField(e)}
                 placeholder="Insira as observações"
               />
             </div>
@@ -342,7 +400,9 @@ export default class Vacancy extends Component {
                 rows="5"
                 type="text"
                 className="form-control"
-                name="name"
+                name="obsOfficeHour"
+                value={this.state.requester.obsOfficeHour}
+                onChange={(e) => this.updateField(e)}
                 placeholder="Insira as observações"
               />
             </div>
@@ -354,7 +414,9 @@ export default class Vacancy extends Component {
                 rows="5"
                 type="text"
                 className="form-control"
-                name="name"
+                name="requerimentsForPosition"
+                value={this.state.requester.requerimentsForPosition}
+                onChange={(e) => this.updateField(e)}
                 placeholder="Insira as observações"
               />
             </div>
@@ -376,13 +438,13 @@ export default class Vacancy extends Component {
       </div>
     );
   }
-  load(vacancies) {
-    this.setState({ vacancies });
+  load(requester) {
+    this.setState({ requester });
   }
 
-  remove(vacancies) {
-    axios.delete(`${baseUrl}/${vacancies._id}`).then((resp) => {
-      const list = this.getUpdatedList(vacancies, false);
+  remove(requester) {
+    axios.delete(`${baseUrl}/vacancy/delete/${requester._id}`).then((resp) => {
+      const list = this.getUpdatedList(requester, false);
       this.setState({ list });
     });
   }
@@ -391,13 +453,6 @@ export default class Vacancy extends Component {
       <table className="table mt-4">
         <thead>
           <tr>
-            <th>Abertura</th>
-            <th>Cargo</th>
-            <th>Setor</th>
-            <th>Gestor</th>
-            <th>Responsável</th>
-            <th>Motivo</th>
-            <th>Salário</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -406,44 +461,20 @@ export default class Vacancy extends Component {
     );
   }
   renderRows() {
-    return this.state.list.map((vacancies) => {
+    return this.state.list.map((requester) => {
       return (
-        <tr key={vacancies._id}>
-          <td>{vacancies.status}</td>
-          <td>{vacancies.dateTime}</td>
-          <td>{vacancies.name}</td>
-          <td>{vacancies.area}</td>
-          <td>{vacancies.replacement}</td>
-          <td>{vacancies.temporary}</td>
-          <td>{vacancies.intern}</td>
-          <td>{vacancies.apprentice}</td>
-          <td>{vacancies.admissionDateOrExpectDate}</td>
-          <td>{vacancies.positionOrFunction}</td>
-          <td>{vacancies.initialSalary}</td>
-          <td>{vacancies.sector}</td>
-          <td>{vacancies.postExpSalary}</td>
-          <td>{vacancies.obsOrSalaryRemarks}</td>
-          <td>{vacancies.industryHour}</td>
-          <td>{vacancies.administrativeHour}</td>
-          <td>{vacancies.shopHour}</td>
-          <td>{vacancies.differentHour}</td>
-          <td>{vacancies.noJourneyControl}</td>
-          <td>{vacancies.entranceDay}</td>
-          <td>{vacancies.exitDay}</td>
-          <td>{vacancies.entranceLunch}</td>
-          <td>{vacancies.exitLunch}</td>
-          <td>{vacancies.requerimentsForPosition}</td>
-          <td>{vacancies.status}</td>
+        <tr key={requester._id}>
+          <td>{requester.status}</td>
           <td>
             <button
               className="btn btn-warning ml-2"
-              onClick={() => this.load(vacancies)}
+              onClick={() => this.load(requester)}
             >
               <i className="fa fa-pencil"></i>
             </button>
             <button
               className="btn btn-danger ml-2"
-              onClick={() => this.remove(vacancies)}
+              onClick={() => this.remove(requester)}
             >
               <i className="fa-solid fa-trash"></i>
             </button>
