@@ -5,7 +5,7 @@ export default function TimeInput(props) {
   let mask = "12:34";
   let formatChars = {
     1: "[0-2]",
-    2: "[0-9]",
+    2: "[0-3]",
     3: "[0-5]",
     4: "[0-9]",
   };
@@ -26,9 +26,7 @@ export default function TimeInput(props) {
       className="form-control"
       onChange={props.onChange}
       formatChars={formatChars}
-      placeholder="00:00"
       beforeMaskedValueChange={beforeMaskedValueChange}
-      awaysShowMask="true"
     ></InputHourMask>
   );
 }

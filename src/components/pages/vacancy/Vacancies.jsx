@@ -4,7 +4,8 @@ import axios from "axios";
 import Main from "../../template/main/Main";
 import InputHourMask from "../../template/inputMask/InputHourMask";
 import InputMoneyMask from "../../template/inputMask/InputMoneyMask";
-import InputDateMaskBootstrap from "../../template/inputMask/InputDateMaskBootstrap";
+import InputDateMaskBootstrapEnabled from "../../template/inputMask/InputDateMaskBootstrapEnabled";
+import InputDateMaskBootstrapDisabled from "../../template/inputMask/InputDateMaskBootstrapDisabled";
 
 const headerProps = {
   icon: "users",
@@ -167,7 +168,9 @@ export default class Vacancies extends Component {
                 name="selectiveProcess"
                 onChange={(e) => this.updateField(e)}
               >
-                <option selected>{this.state.requester.selectiveProcess}</option>
+                <option selected>
+                  {this.state.requester.selectiveProcess}
+                </option>
                 <option value="Substituição">Substituição</option>
                 <option value="Temporário">Temporário</option>
                 <option value="Estagiário">Estagiário</option>
@@ -191,8 +194,9 @@ export default class Vacancies extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Abertura</label>
-              <InputDateMaskBootstrap
+              <InputDateMaskBootstrapDisabled
                 name="vacancyDateOpen"
+                type="number"
                 value={this.state.requester.vacancyDateOpen}
                 onChange={(e) => this.updateField(e)}
               />
@@ -201,7 +205,7 @@ export default class Vacancies extends Component {
           <div className="col-12 col-md-3">
             <div className="form-group">
               <label>Admissão/Início</label>
-              <InputDateMaskBootstrap
+              <InputDateMaskBootstrapEnabled
                 name="admissionDate"
                 value={this.state.requester.admissionDate}
                 onChange={(e) => this.updateField(e)}
@@ -230,7 +234,6 @@ export default class Vacancies extends Component {
                 name="sector"
                 onChange={(e) => this.updateField(e)}
               >
-
                 <option selected>{this.state.requester.sector}</option>
                 <option value="Almoxarifado">Almoxarifado</option>
                 <option value="Comercial">Comercial</option>
@@ -296,7 +299,9 @@ export default class Vacancies extends Component {
                   Horário Administrativo
                 </option>
                 <option value="Horário Lojas">Horário Lojas</option>
-                <option value="Horário Diferenciado">Horário Diferenciado</option>
+                <option value="Horário Diferenciado">
+                  Horário Diferenciado
+                </option>
                 <option value="Sem controle de jornada">
                   Sem controle de jornada
                 </option>
@@ -485,9 +490,12 @@ export default class Vacancies extends Component {
           <td>{requester.postExpSalary}</td>
           <td>{requester.obsOrSalaryRemarks}</td>
           <td>{requester.entranceDayHour}</td>
+          <td>{requester.firstDayWeek}</td>
+          <td>{requester.lastDayWeek}</td>
           <td>{requester.exitDayHour}</td>
           <td>{requester.entranceLunchHour}</td>
           <td>{requester.exitLunchHour}</td>
+          <td>{requester.workDay}</td>
           <td>{requester.requerimentsForPosition}</td>
           <td>
             <button
