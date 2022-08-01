@@ -30,6 +30,12 @@ const initialState = {
     workDayStyle: "",
     entranceDayHour: "",
     exitDayHour: "",
+    firstWeekDay: "",
+    lastWeekDay: "",
+    entranceLunchHour: "",
+    exitLunchHour: "",
+    obsOfficeHour: "",
+    requerimentsForPosition: "",
   },
   list: [],
 };
@@ -370,7 +376,6 @@ export default class Vacancies extends Component {
                 name="entranceDayHour"
                 onChange={(e) => this.updateField(e)}
               >
-
                 <option selected>{this.state.requester.entranceDayHour}</option>
                 <option value="06:00">06:00</option>
                 <option value="06:30">06:30</option>
@@ -405,7 +410,6 @@ export default class Vacancies extends Component {
                 name="exitDayHour"
                 onChange={(e) => this.updateField(e)}
               >
-
                 <option selected>{this.state.requester.exitDayHour}</option>
                 <option value="10:00">10:00</option>
                 <option value="10:30">10:30</option>
@@ -432,6 +436,132 @@ export default class Vacancies extends Component {
                 <option value="21:00">21:00</option>
                 <option value="21:30">21:30</option>
               </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Primeiro dia</label>
+              <select
+                type="text"
+                className="form-control"
+                name="firstWeekDay"
+                onChange={(e) => this.updateField(e)}
+              >
+                <option selected>{this.state.requester.firstWeekDay}</option>
+                <option value="Segunda-Feira">Segunda-Feira</option>
+                <option value="Terça-Feira">Terça-Feira</option>
+                <option value="Quarta-Feira">Quarta-Feira</option>
+                <option value="Quinta-Feira">Quinta-Feira</option>
+                <option value="Sexta-Feira">Sexta-Feira</option>
+                <option value="Sábado">Sábado</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Último dia</label>
+              <select
+                type="text"
+                className="form-control"
+                name="lastWeekDay"
+                onChange={(e) => this.updateField(e)}
+              >
+                <option selected>{this.state.requester.lastWeekDay}</option>
+                <option value="Segunda-Feira">Segunda-Feira</option>
+                <option value="Terça-Feira">Terça-Feira</option>
+                <option value="Quarta-Feira">Quarta-Feira</option>
+                <option value="Quinta-Feira">Quinta-Feira</option>
+                <option value="Sexta-Feira">Sexta-Feira</option>
+                <option value="Sábado">Sábado</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Entrada intervalo</label>
+              <select
+                type="text"
+                className="form-control"
+                name="entranceLunchHour"
+                onChange={(e) => this.updateField(e)}
+              >
+                <option selected>
+                  {this.state.requester.entranceLunchHour}
+                </option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Entrada intervalo</label>
+              <select
+                type="text"
+                className="form-control"
+                name="exitLunchHour"
+                onChange={(e) => this.updateField(e)}
+              >
+                <option selected>{this.state.requester.exitLunchHour}</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Observações sobre o expediente</label>
+              <textarea
+                rows="5"
+                type="text"
+                className="form-control"
+                name="obsOfficeHour"
+                value={this.state.requester.obsOfficeHour}
+                onChange={(e) => this.updateField(e)}
+                placeholder="Insira as observações"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="form-group">
+              <label>Requisitos para o cargo</label>
+              <textarea
+                rows="5"
+                type="text"
+                className="form-control"
+                name="requerimentsForPosition"
+                value={this.state.requester.requerimentsForPosition}
+                onChange={(e) => this.updateField(e)}
+                placeholder="Insira as observações"
+              />
             </div>
           </div>
         </div>
