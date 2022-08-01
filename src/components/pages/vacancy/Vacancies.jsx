@@ -365,7 +365,7 @@ export default class Vacancies extends Component {
             <div className="form-group">
               <label>Entrada expediente</label>
               <select
-                type="number"
+                type="text"
                 className="form-control"
                 name="entranceDayHour"
                 onChange={(e) => this.updateField(e)}
@@ -398,9 +398,9 @@ export default class Vacancies extends Component {
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Entrada expediente</label>
+              <label>Saída expediente</label>
               <select
-                type="number"
+                type="text"
                 className="form-control"
                 name="exitDayHour"
                 onChange={(e) => this.updateField(e)}
