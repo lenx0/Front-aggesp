@@ -205,13 +205,14 @@ export default class Vacancies extends Component {
           <div className="col-12 col-md-6">
             <div className="form-group">
               <label>Salário Inicial</label>
-              <input
+              <InputMoneyMask
                 type="text"
                 className="form-control"
                 name="initialSalary"
                 value={this.state.requester.initialSalary}
                 onChange={(e) => this.updateField(e)}
-              ></input>
+                placeholder="R$00.00"
+              />
             </div>
           </div>
           <div className="col-12 col-md-6">
