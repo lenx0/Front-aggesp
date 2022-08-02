@@ -10,7 +10,7 @@ const headerProps = {
 
 const baseUrl = "http://localhost:3005/v1/agesp";
 const initialState = {
-  user: {
+  requester: {
     vacancyDateOpen: "",
     positionOrFunction: "",
     sector: "",
@@ -26,7 +26,7 @@ const initialState = {
   list: [],
 };
 
-export default class Dashboard extends Component {
+export default class Vacancies extends Component {
   state = { ...initialState };
 
   componentWillMount() {
@@ -37,36 +37,36 @@ export default class Dashboard extends Component {
   }
 
   clear() {
-    this.setState({ user: initialState.user });
+    this.setState({ requester: initialState.requester });
   }
 
   save() {
-    const user = this.state.user;
-    const method = user._id ? "put" : "post";
-    const url = user._id
-      ? `${baseUrl}/user/update/${user._id}`
+    const requester = this.state.requester;
+    const method = requester._id ? "put" : "post";
+    const url = requester._id
+      ? `${baseUrl}/user/update/${vacancy._id}`
       : `${baseUrl}/user/create/`;
     console.log(method);
     console.log(url);
-    console.log(user);
-    axios[method](url, user).then((resp) => {
+    console.log(requester);
+    axios[method](url, requester).then((resp) => {
       const list = this.getUpdatedList(resp.data);
-      this.setState({ user: initialState.user, list });
+      this.setState({ requester: initialState.requester, list });
       console.log(resp.data);
       console.log(list);
     });
   }
 
-  getUpdatedList(user, add = true) {
-    const list = this.state.list.filter((u) => u._id !== user._id);
-    if (add) list.unshift(user);
+  getUpdatedList(requester, add = true) {
+    const list = this.state.list.filter((u) => u._id !== requester._id);
+    if (add) list.unshift(requester);
     return list;
   }
 
   updateField(event) {
-    const user = { ...this.state.user };
-    user[event.target.name] = event.target.value;
-    this.setState({ user });
+    const requester = { ...this.state.requester };
+    requester[event.target.name] = event.target.value;
+    this.setState({ requester });
   }
 
   renderForm() {
@@ -77,13 +77,13 @@ export default class Dashboard extends Component {
     );
   }
 
-  load(user) {
-    this.setState({ user });
+  load(requester) {
+    this.setState({ requester });
   }
 
-  remove(dashboard) {
+  remove(requester) {
     axios.delete(`${baseUrl}/vacancy/delete/${vacancy._id}`).then((resp) => {
-      const list = this.getUpdatedList(dashboard, false);
+      const list = this.getUpdatedList(requester, false);
       this.setState({ list });
     });
   }
@@ -113,37 +113,36 @@ export default class Dashboard extends Component {
   }
 
   renderRows() {
-    return this.state.list.map((dashboard) => {
+    return this.state.list.map((requester) => {
       return (
-        <tr key={dashboard._id}>
+        <tr key={requester._id}>
           <td>
             <button
               className="btn btn-success ml-2"
               id="btn-check"
-              onClick={() => this.load(dashboard)}
+              onClick={() => this.load(requester)}
             >
               <i className="fa-solid fa-circle-check"></i>
             </button>
             <button
               className="btn btn-danger ml-2"
               id="btn-delete"
-              onClick={() => this.remove(dashboard)}
+              onClick={() => this.remove(requester)}
             >
               <i className="fa-solid fa-circle-xmark"></i>
             </button>
           </td>
-          <td>{dashboard.vacancyDateOpen}</td>
-          <td>{dashboard.positionOrFunction}</td>
-          <td>{dashboard.sector}</td>
-          <td>{dashboard.manager}</td>
-          <td>{dashboard.responsible}</td>
-          <td>{dashboard.hiringReason}</td>
-          <td>{dashboard.replacedEmployee}</td>
-          <td>{dashboard.initialSalary}</td>
-          <td>{dashboard.status}</td>
-          <td>{dashboard.admissionDate}</td>
-          <td>{dashboard.vacancyDateClose}</td>
-          
+          <td>{requester.vacancyDateOpen}</td>
+          <td>{requester.positionOrFunction}</td>
+          <td>{requester.sector}</td>
+          <td>{requester.manager}</td>
+          <td>{requester.responsible}</td>
+          <td>{requester.hiringReason}</td>
+          <td>{requester.replacedEmployee}</td>
+          <td>{requester.initialSalary}</td>
+          <td>{requester.status}</td>
+          <td>{requester.admissionDate}</td>
+          <td>{requester.vacancyDateClose}</td>
         </tr>
       );
     });

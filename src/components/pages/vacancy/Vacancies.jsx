@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import Main from "../../template/main/Main";
 import InputMoneyMask from "../../template/inputMask/InputMoneyMask";
+import "./Vacancies.css";
+import moment from "moment";
 
 const headerProps = {
   icon: "users",
@@ -332,7 +334,7 @@ export default class Vacancies extends Component {
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Obs da contratação</label>
+              <label>Observações do salário</label>
               <textarea
                 rows="5"
                 type="text"
@@ -378,6 +380,7 @@ export default class Vacancies extends Component {
                 onChange={(e) => this.updateField(e)}
               >
                 <option selected>{this.state.requester.entranceDayHour}</option>
+                <option value="05:30">05:30</option>
                 <option value="06:00">06:00</option>
                 <option value="06:30">06:30</option>
                 <option value="07:00">07:00</option>
@@ -393,12 +396,6 @@ export default class Vacancies extends Component {
                 <option value="12:00">12:00</option>
                 <option value="12:30">12:30</option>
                 <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
               </select>
             </div>
           </div>
@@ -412,12 +409,6 @@ export default class Vacancies extends Component {
                 onChange={(e) => this.updateField(e)}
               >
                 <option selected>{this.state.requester.exitDayHour}</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
                 <option value="13:00">13:00</option>
                 <option value="13:30">13:30</option>
                 <option value="14:00">14:00</option>
@@ -433,9 +424,6 @@ export default class Vacancies extends Component {
                 <option value="19:00">19:00</option>
                 <option value="19:30">19:30</option>
                 <option value="20:00">20:00</option>
-                <option value="20:30">20:30</option>
-                <option value="21:00">21:00</option>
-                <option value="21:30">21:30</option>
               </select>
             </div>
           </div>
@@ -489,28 +477,18 @@ export default class Vacancies extends Component {
                 <option selected>
                   {this.state.requester.entranceLunchHour}
                 </option>
-                <option value="08:30">08:30</option>
-                <option value="09:00">09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
                 <option value="11:00">11:00</option>
                 <option value="11:30">11:30</option>
                 <option value="12:00">12:00</option>
                 <option value="12:30">12:30</option>
                 <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
                 <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
               </select>
             </div>
           </div>
           <div className="col-12 col-md-6">
             <div className="form-group">
-              <label>Entrada intervalo</label>
+              <label>Saída intervalo</label>
               <select
                 type="text"
                 className="form-control"
@@ -518,22 +496,11 @@ export default class Vacancies extends Component {
                 onChange={(e) => this.updateField(e)}
               >
                 <option selected>{this.state.requester.exitLunchHour}</option>
-                <option value="08:30">08:30</option>
-                <option value="09:00">09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
                 <option value="11:00">11:00</option>
                 <option value="11:30">11:30</option>
                 <option value="12:00">12:00</option>
                 <option value="12:30">12:30</option>
                 <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
               </select>
             </div>
           </div>
@@ -598,6 +565,7 @@ export default class Vacancies extends Component {
       <table className="table mt-4">
         <thead>
           <tr>
+            <th>Ações</th>
             <th>Abertura</th>
             <th>Cargo</th>
             <th>Setor</th>
@@ -610,7 +578,6 @@ export default class Vacancies extends Component {
             <th>Admitido</th>
             <th>Fechamento</th>
             <th>Observações da contratação</th>
-            <th>Ações</th>
           </tr>
         </thead>
         <tbody>{this.renderRows()}</tbody>
@@ -622,7 +589,23 @@ export default class Vacancies extends Component {
     return this.state.list.map((requester) => {
       return (
         <tr key={requester._id}>
-          <td>{requester.vacancyDateOpen}</td>
+          <td>
+            <button
+              className="btn btn-warning ml-2"
+              id="btn-check"
+              onClick={() => this.load(requester)}
+            >
+              <i className="fa fa-pencil"></i>
+            </button>
+            <button
+              className="btn btn-danger ml-2"
+              id="btn-delete"
+              onClick={() => this.remove(requester)}
+            >
+              <i className="fa-solid fa-trash"></i>
+            </button>
+          </td>
+          <td>{moment(requester.vacancyDateOpen).format("DD/MM/YYYY")}</td>
           <td>{requester.positionOrFunction}</td>
           <td>{requester.sector}</td>
           <td>{requester.manager}</td>
@@ -631,23 +614,9 @@ export default class Vacancies extends Component {
           <td>{requester.replacedEmployee}</td>
           <td>{requester.initialSalary}</td>
           <td>{requester.status}</td>
-          <td>{requester.admissionDate}</td>
-          <td>{requester.vacancyDateClose}</td>
+          <td>{moment(requester.admissionDate).format("DD/MM/YYYY")}</td>
+          <td>{moment(requester.vacancyDateClose).format("DD/MM/YYYY")}</td>
           <td>{requester.obsToHiring}</td>
-          <td>
-            <button
-              className="btn btn-warning ml-2"
-              onClick={() => this.load(requester)}
-            >
-              <i className="fa fa-pencil"></i>
-            </button>
-            <button
-              className="btn btn-danger ml-2"
-              onClick={() => this.remove(requester)}
-            >
-              <i className="fa-solid fa-trash"></i>
-            </button>
-          </td>
         </tr>
       );
     });
