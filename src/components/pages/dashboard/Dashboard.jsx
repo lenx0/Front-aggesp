@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Main from "../../template/main/Main";
+import moment from "moment"
 
 const headerProps = {
   icon: "users",
-  title: "Painel de vagas",
-  subtitle: "Gerenciamento das vagas atuais",
+  title: "Vagas disponíveis",
+  subtitle: "Painel de aprovação",
 };
 
 const baseUrl = "http://localhost:3005/v1/agesp";
@@ -38,6 +39,18 @@ export default class Vacancies extends Component {
 
   clear() {
     this.setState({ requester: initialState.requester });
+  }
+
+  reprove() {
+    const requester = this.state.requester;
+    const method = "put";
+    const url = `{baseUrl}/vacancy/update/${vacancy._id}`
+    axios[method](url, requester).then((resp) => {
+      const list = this.getUpdatedList(resp.data);
+      this.setState({ requester: initialState.requester, list });
+    })
+    const vacancyReprove = this.getUpdatedList(requester, false);
+    this.setSate({ list });
   }
 
   save() {
@@ -90,7 +103,9 @@ export default class Vacancies extends Component {
 
   renderTable() {
     return (
-      <table className="table mt-4">
+      <div className="scrollbar scrollbar-lady-lips">
+        <div className="force-overflow">
+      <table className="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Ações</th>
@@ -109,6 +124,8 @@ export default class Vacancies extends Component {
         </thead>
         <tbody>{this.renderRows()}</tbody>
       </table>
+      </div>
+      </div>
     );
   }
 
@@ -132,7 +149,7 @@ export default class Vacancies extends Component {
               <i className="fa-solid fa-circle-xmark"></i>
             </button>
           </td>
-          <td>{requester.vacancyDateOpen}</td>
+          <td>{moment(requester.vacancyDateOpen).format('DD.MM.YYYY')}</td>
           <td>{requester.positionOrFunction}</td>
           <td>{requester.sector}</td>
           <td>{requester.manager}</td>
@@ -141,8 +158,8 @@ export default class Vacancies extends Component {
           <td>{requester.replacedEmployee}</td>
           <td>{requester.initialSalary}</td>
           <td>{requester.status}</td>
-          <td>{requester.admissionDate}</td>
-          <td>{requester.vacancyDateClose}</td>
+          <td>{moment(requester.admissionDate).format('DD.MM.YYYY')}</td>
+          <td>{moment(requester.vacancyDateClose).format('DD.MM.YYYY')}</td>
         </tr>
       );
     });

@@ -605,7 +605,7 @@ export default class Vacancies extends Component {
               <i className="fa-solid fa-trash"></i>
             </button>
           </td>
-          <td>{moment(requester.vacancyDateOpen).format("DD/MM/YYYY")}</td>
+          <td>{moment(requester.vacancyDateOpen).format("DD.MM.YYYY")}</td>
           <td>{requester.positionOrFunction}</td>
           <td>{requester.sector}</td>
           <td>{requester.manager}</td>
@@ -614,8 +614,8 @@ export default class Vacancies extends Component {
           <td>{requester.replacedEmployee}</td>
           <td>{requester.initialSalary}</td>
           <td>{requester.status}</td>
-          <td>{moment(requester.admissionDate).format("DD/MM/YYYY")}</td>
-          <td>{moment(requester.vacancyDateClose).format("DD/MM/YYYY")}</td>
+          <td>{moment(requester.admissionDate).format("DD.MM.YYYY")}</td>
+          <td>{moment(requester.vacancyDateClose).format("DD.MM.YYYY")}</td>
           <td>{requester.obsToHiring}</td>
         </tr>
       );
