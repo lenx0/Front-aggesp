@@ -1,0 +1,47 @@
+.content-main>div {
+    background-color: #FFF;
+    box-shadow: 0px 0px 15px #0004;
+}
+
+.content-main>div {
+    width: 50%;
+    height: 60%;
+}
+
+.content-main p {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+input {
+    width: 50px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-login,
+.btn-register {
+    margin: 5px;
+    width: 150px;
+    height: 40px;
+    background-color: rgb(150, 43, 43);
+    color: white;
+    border: none;
+    border-radius: 2px;
+}
+
+.btn-login:hover,
+.btn-register:hover {
+    background: linear-gradient(135deg, #fff9a2 0%, #fff9a2 100%);
+    color: black;
+}
