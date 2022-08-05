@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import Main from "../../template/main/Main";
 import moment from "moment"
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 
 const headerProps = {
   icon: "users",
@@ -134,7 +136,7 @@ export default class Vacancies extends Component {
       return (
         <tr key={requester._id}>
           <td>
-            <button
+            {/* <button
               className="btn btn-success ml-2"
               id="btn-check"
               onClick={() => this.load(requester)}
@@ -147,6 +149,12 @@ export default class Vacancies extends Component {
               onClick={() => this.remove(requester)}
             >
               <i className="fa-solid fa-circle-xmark"></i>
+            </button> */}
+            <button
+              className="btn btn-warning ml-2"
+              id="btn-print"
+            >
+              <i className="fa-solid fa-print"></i>
             </button>
           </td>
           <td>{moment(requester.vacancyDateOpen).format('DD.MM.YYYY')}</td>
