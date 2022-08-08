@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import Main from "../../template/main/Main";
 import moment from "moment"
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import vagas from "./Vagas";
+
 
 const headerProps = {
   icon: "users",
@@ -153,6 +153,7 @@ export default class Vacancies extends Component {
             <button
               className="btn btn-warning ml-2"
               id="btn-print"
+              onClick={vagas}
             >
               <i className="fa-solid fa-print"></i>
             </button>
