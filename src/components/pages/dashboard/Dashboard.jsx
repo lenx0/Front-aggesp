@@ -11,9 +11,10 @@ const headerProps = {
   subtitle: "Painel de aprovação",
 };
 
-const baseUrl = "http://localhost:3005/v1/agesp";
+//const baseUrl = "http://localhost:3005/v1/agesp";
+const baseUrl = "https://aggesp-api.altogiro.net/v1/agesp"
 const initialState = {
-  requester: {
+  requester: [{
     vacancyDateOpen: "",
     positionOrFunction: "",
     sector: "",
@@ -25,7 +26,7 @@ const initialState = {
     status: "",
     admissionDate: "",
     vacancyDateClose: "",
-  },
+  }],
   list: [],
 };
 
@@ -153,7 +154,7 @@ export default class Vacancies extends Component {
             <button
               className="btn btn-warning ml-2"
               id="btn-print"
-              onClick={vagas}
+              onClick={(e) => vagas(requester)}
             >
               <i className="fa-solid fa-print"></i>
             </button>
