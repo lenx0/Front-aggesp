@@ -2,7 +2,7 @@ import React from "react";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
-function clientesPDF(requester) {
+function Vagas(requester) {
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
   const reportTitle = [
@@ -14,7 +14,7 @@ function clientesPDF(requester) {
     },
   ];
 
-  const dados = this.requester.map((vaga) => {
+  const dados = requester.map((vaga) => {
     return [
       { text: vaga.vacancyDateOpen, fontSize: 9, margin: [0, 2, 0, 2] },
       { text: vaga.requesterName, fontSize: 9, margin: [0, 2, 0, 2] },
@@ -65,4 +65,4 @@ function clientesPDF(requester) {
   pdfMake.createPdf(docDefinitios).download();
 }
 
-export default clientesPDF;
+export default Vagas;
