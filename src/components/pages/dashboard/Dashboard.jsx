@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Main from "../../template/main/Main";
 import moment from "moment"
-import vagas from "./Vagas";
 
 
 const headerProps = {
@@ -153,8 +152,6 @@ export default class Vacancies extends Component {
             </button> */}
             <button
               className="btn btn-warning ml-2"
-              id="btn-print"
-              onClick={(e) => vagas(requester)}
             >
               <i className="fa-solid fa-print"></i>
             </button>
